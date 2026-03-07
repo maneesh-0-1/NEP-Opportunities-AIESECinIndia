@@ -24,7 +24,6 @@
     /* Extreme blur to turn particles into a completely unrecognizable fluid mass */
     filter: blur(100px);
     -webkit-filter: blur(100px);
-    transform: translateZ(0);
 }
 
 /* Large sweeping movements for the fluid particles */
@@ -58,4 +57,23 @@
     background-size: 80px 80px;
     opacity: 0.6;
     pointer-events: none;
+}
+
+/* --- Mobile Performance Fallbacks --- */
+@media (max-width: 768px) {
+
+    /* Render only 15 fluid particles instead of 50 to save heavy GPU processing on mobile */
+    .liquid-orb:nth-child(n+16) {
+        display: none !important;
+        animation: none !important;
+    }
+
+    .liquid-orb {
+        /* Mobile hardware struggles with multi-layer screen blend modes + blur. 
+           Fall back to softer opacities without blend-mode to stop the screen blinking */
+        mix-blend-mode: normal;
+        filter: blur(40px) !important;
+        -webkit-filter: blur(40px) !important;
+        opacity: 0.4 !important;
+    }
 }

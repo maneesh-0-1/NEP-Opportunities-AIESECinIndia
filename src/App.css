@@ -473,9 +473,14 @@ body {
   }
 
   .app-header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column-reverse;
+    align-items: flex-end;
     text-align: left;
+    gap: 0.5rem;
+  }
+
+  .header-text {
+    width: 100%;
   }
 
   .header-title {
@@ -487,8 +492,13 @@ body {
   }
 
   .logo-card {
-    width: 100%;
-    justify-content: center;
+    width: auto;
+    padding: 0.5rem 1rem;
+  }
+
+  .actual-logo {
+    max-width: 80px;
+    max-height: 25px;
   }
 
   .sidebar {
