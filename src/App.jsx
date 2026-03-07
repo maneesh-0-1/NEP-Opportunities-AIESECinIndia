@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaGlobe, FaCog, FaPlaneDeparture, FaSeedling, FaDollarSign, FaRupeeSign, FaShieldAlt, FaLaptop, FaCheckCircle, FaSearch } from 'react-icons/fa';
 import BackgroundFluid from './BackgroundFluid';
 import './App.css';
@@ -59,6 +59,7 @@ function App() {
   const [search, setSearch] = useState('');
   const [selectedCompany, setSelectedCompany] = useState(null);
   const [loading, setLoading] = useState(true);
+  const profileRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -157,7 +158,15 @@ function App() {
                     <div
                       key={idx}
                       className={`company-item ${isActive ? 'active' : ''}`}
-                      onClick={() => setSelectedCompany(company)}
+                      onClick={() => {
+                        setSelectedCompany(company);
+                        if (window.innerWidth <= 1024 && profileRef.current) {
+                          // Allow a tiny delay for React state batching before scroll
+                          setTimeout(() => {
+                            profileRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }, 50);
+                        }
+                      }}
                     >
                       {compName}
                     </div>
@@ -168,7 +177,7 @@ function App() {
           </aside>
 
           {/* Profile Card */}
-          <section className="main-content">
+          <section className="main-content" ref={profileRef}>
             <article className="glass-panel profile-card">
               {!selectedCompany ? (
                 <div className="empty-state">Select a company on the left to view details.</div>
