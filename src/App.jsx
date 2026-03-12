@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaGlobe, FaCog, FaPlaneDeparture, FaSeedling, FaDollarSign, FaRupeeSign, FaShieldAlt, FaLaptop, FaCheckCircle, FaSearch } from 'react-icons/fa';
+import { FaGlobe, FaCog, FaPlaneDeparture, FaSeedling, FaDollarSign, FaRupeeSign, FaShieldAlt, FaLaptop, FaCheckCircle, FaSearch, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import BackgroundFluid from './BackgroundFluid';
 import './App.css';
 import gtLogo from './assets/GT-logo.png';
@@ -121,7 +122,7 @@ function App() {
         <header className="app-header">
           <div className="header-text">
             <h1 className="header-title">Premium Opportunities</h1>
-            <p className="header-subtitle">Powered by AIESEC</p>
+            <p className="header-subtitle">Powered by AIESEC in India</p>
           </div>
           <div className="glass-panel logo-card">
             <img src={gtLogo} alt="Global Talent Logo" className="actual-logo" />
@@ -188,6 +189,30 @@ function App() {
                   <div className="profile-section">
                     <h3>About</h3>
                     <p>{selectedCompany.About || selectedCompany.about || "Description not available."}</p>
+
+                    {/* Social Media Links */}
+                    <div className="social-links">
+                      {(selectedCompany.Instagram || selectedCompany.instagram) && (
+                        <a href={selectedCompany.Instagram || selectedCompany.instagram} target="_blank" rel="noreferrer" className="social-icon" title="Instagram">
+                          <FaInstagram />
+                        </a>
+                      )}
+                      {(selectedCompany.X || selectedCompany.x || selectedCompany.Twitter || selectedCompany.twitter) && (
+                        <a href={selectedCompany.X || selectedCompany.x || selectedCompany.Twitter || selectedCompany.twitter} target="_blank" rel="noreferrer" className="social-icon" title="X (Twitter)">
+                          <FaXTwitter />
+                        </a>
+                      )}
+                      {(selectedCompany.Linkedin || selectedCompany.linkedin || selectedCompany.LinkedIn || selectedCompany.LinkedIn_Link) && (
+                        <a href={selectedCompany.Linkedin || selectedCompany.linkedin || selectedCompany.LinkedIn || selectedCompany.LinkedIn_Link} target="_blank" rel="noreferrer" className="social-icon" title="LinkedIn">
+                          <FaLinkedin />
+                        </a>
+                      )}
+                      {(selectedCompany.Youtube || selectedCompany.youtube || selectedCompany.YouTube || selectedCompany.Youtube_Link) && (
+                        <a href={selectedCompany.Youtube || selectedCompany.youtube || selectedCompany.YouTube || selectedCompany.Youtube_Link} target="_blank" rel="noreferrer" className="social-icon" title="YouTube">
+                          <FaYoutube />
+                        </a>
+                      )}
+                    </div>
                   </div>
 
                   <div className="profile-section">
