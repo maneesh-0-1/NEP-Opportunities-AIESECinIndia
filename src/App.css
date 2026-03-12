@@ -57,14 +57,14 @@ body {
 
 /* --- Core Glassmorphism Utility --- */
 .glass-panel {
-  background: linear-gradient(135deg, rgba(20, 35, 60, 0.4) 0%, rgba(10, 20, 40, 0.6) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, rgba(20, 35, 60, 0.55) 0%, rgba(10, 20, 40, 0.75) 100%);
+  backdrop-filter: blur(60px);
+  -webkit-backdrop-filter: blur(60px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: var(--radius-lg);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 2px 5px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 2px 8px rgba(255, 255, 255, 0.2);
 }
 
 .glass-panel>* {
