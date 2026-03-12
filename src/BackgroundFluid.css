@@ -22,8 +22,8 @@
     animation: float-fluid infinite ease-in-out alternate;
     pointer-events: none;
     /* Extreme blur to turn particles into a completely unrecognizable fluid mass */
-    filter: blur(100px);
-    -webkit-filter: blur(100px);
+    filter: blur(150px);
+    -webkit-filter: blur(150px);
 }
 
 /* Large sweeping movements for the fluid particles */
@@ -69,11 +69,11 @@
     }
 
     .liquid-orb {
-        /* Mobile hardware struggles with multi-layer screen blend modes + blur. 
-           Fall back to softer opacities without blend-mode to stop the screen blinking */
+        /* Mobile hardware struggles with multi-layer screen blend modes + heavy blurs. 
+           We use a very high blur with normal blending and higher opacity for a premium look without blinking */
         mix-blend-mode: normal;
-        filter: blur(40px) !important;
-        -webkit-filter: blur(40px) !important;
-        opacity: 0.4 !important;
+        filter: blur(90px) !important;
+        -webkit-filter: blur(90px) !important;
+        opacity: 0.6 !important;
     }
 }
