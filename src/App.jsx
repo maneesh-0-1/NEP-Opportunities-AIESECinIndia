@@ -4,6 +4,7 @@ import { FaXTwitter } from 'react-icons/fa6';
 import BackgroundFluid from './BackgroundFluid';
 import './App.css';
 import gtLogo from './assets/GT-logo.png';
+import mainIcon from './assets/icon.png';
 
 const API_URL = "https://script.google.com/macros/s/AKfycbzjfElmM0yCCLrZbes7xjU4Wi4G6FvM6njtEFdLn-7fNdGmU2P8XsxuEmt1GiW5e_xMzw/exec";
 
@@ -124,7 +125,9 @@ function App() {
             <h1 className="header-title">Premium Opportunities</h1>
             <p className="header-subtitle">Powered by AIESEC in India</p>
           </div>
-          <div className="glass-panel logo-card">
+          <div className="glass-panel logo-card" style={{ gap: '1.5rem' }}>
+            <img src={mainIcon} alt="Main App Icon" className="actual-logo" style={{ maxHeight: '45px' }} />
+            <div style={{ width: '1px', height: '40px', background: 'rgba(255, 255, 255, 0.2)' }}></div>
             <img src={gtLogo} alt="Global Talent Logo" className="actual-logo" />
           </div>
         </header>
