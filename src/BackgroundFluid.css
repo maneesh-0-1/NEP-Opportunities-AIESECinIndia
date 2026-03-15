@@ -21,9 +21,9 @@
     /* We animate inline, but define the keyframe handler here */
     animation: float-fluid infinite ease-in-out alternate;
     pointer-events: none;
-    /* Extreme blur to turn particles into a completely unrecognizable fluid mass */
-    filter: blur(150px);
-    -webkit-filter: blur(150px);
+    /* Moderate blur so they retain soft structure without becoming unrecognizable */
+    filter: blur(40px);
+    -webkit-filter: blur(40px);
 }
 
 /* Large sweeping movements for the fluid particles */
@@ -52,10 +52,31 @@
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    /* Detailed dot matrix and subtle grid for structural texture */
+    background-image:
+        radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 80px 80px;
-    opacity: 0.6;
+    background-size:
+        30px 30px,
+        150px 150px,
+        150px 150px;
+    background-position:
+        0 0,
+        0 0,
+        0 0;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+/* Premium noise overlay to remove banding and add physical texture */
+.background-grid::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('data:image/svg+xml,%3Csvg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="1" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.15"/%3E%3C/svg%3E');
+    opacity: 0.8;
+    mix-blend-mode: overlay;
     pointer-events: none;
 }
 
@@ -72,8 +93,8 @@
         /* Mobile hardware struggles with multi-layer screen blend modes + heavy blurs. 
            We use a very high blur with normal blending and higher opacity for a premium look without blinking */
         mix-blend-mode: normal;
-        filter: blur(90px) !important;
-        -webkit-filter: blur(90px) !important;
+        filter: blur(40px) !important;
+        -webkit-filter: blur(40px) !important;
         opacity: 0.6 !important;
     }
 }
