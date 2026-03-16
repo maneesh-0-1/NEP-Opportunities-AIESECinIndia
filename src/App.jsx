@@ -243,33 +243,45 @@ function App() {
         {/* Opportunities Grid */}
         <div className="opportunities-container">
           {selectedCompany ? (
-            [1, 2, 3].map(num => {
-              const title = selectedCompany[`Opp ${num} Title`] || selectedCompany[`opp${num}Title`] || selectedCompany[`Opp_${num}_Name`];
-              const desc = selectedCompany[`Opp ${num} Desc`] || selectedCompany[`opp${num}Desc`] || selectedCompany[`Opp_${num}_About`];
-              const link = selectedCompany[`Opp_${num}_Link`] || selectedCompany[`Opp ${num} Link`] || selectedCompany[`opp${num}Link`];
-              const salary = selectedCompany[`Opp ${num} Salary`] || selectedCompany[`opp${num}Salary`] || selectedCompany[`Opp_${num}_Salary`];
+            (() => {
+              // Dynamically find how many opportunities are in the data based on keys
+              let maxOpp = 3; // default minimum
+              Object.keys(selectedCompany).forEach(key => {
+                const match = key.match(/opp\s*_?(\d+)/i);
+                if (match) {
+                  const num = parseInt(match[1], 10);
+                  if (num > maxOpp) maxOpp = num;
+                }
+              });
 
-              // If title doesn't exist or is empty string, don't render this Opportunity card
-              if (!title || String(title).trim() === "") return null;
+              return Array.from({ length: maxOpp }, (_, i) => i + 1).map(num => {
+                const title = selectedCompany[`Opp ${num} Title`] || selectedCompany[`opp${num}Title`] || selectedCompany[`Opp_${num}_Name`];
+                const desc = selectedCompany[`Opp ${num} Desc`] || selectedCompany[`opp${num}Desc`] || selectedCompany[`Opp_${num}_About`];
+                const link = selectedCompany[`Opp_${num}_Link`] || selectedCompany[`Opp ${num} Link`] || selectedCompany[`opp${num}Link`];
+                const salary = selectedCompany[`Opp ${num} Salary`] || selectedCompany[`opp${num}Salary`] || selectedCompany[`Opp_${num}_Salary`];
 
-              return (
-                <div key={num} className="glass-panel opp-card">
-                  <h3 className="opp-title">{title}</h3>
-                  {salary && String(salary).trim() !== "" && (
-                    <div className="opp-salary">
-                      <FaRupeeSign className="salary-icon" />
-                      {salary}
-                    </div>
-                  )}
-                  <p className="opp-desc">{desc || "Details available upon application."}</p>
-                  {link && String(link).trim() !== "" ? (
-                    <a href={link} target="_blank" rel="noreferrer" className="btn-details">See details</a>
-                  ) : (
-                    <span className="btn-details" style={{ opacity: 0.5, cursor: 'not-allowed' }}>No link available</span>
-                  )}
-                </div>
-              );
-            })
+                // If title doesn't exist or is empty string, don't render this Opportunity card
+                if (!title || String(title).trim() === "") return null;
+
+                return (
+                  <div key={num} className="glass-panel opp-card">
+                    <h3 className="opp-title">{title}</h3>
+                    {salary && String(salary).trim() !== "" && (
+                      <div className="opp-salary">
+                        <FaRupeeSign className="salary-icon" />
+                        {salary}
+                      </div>
+                    )}
+                    <p className="opp-desc">{desc || "Details available upon application."}</p>
+                    {link && String(link).trim() !== "" ? (
+                      <a href={link} target="_blank" rel="noreferrer" className="btn-details">See details</a>
+                    ) : (
+                      <span className="btn-details" style={{ opacity: 0.5, cursor: 'not-allowed' }}>No link available</span>
+                    )}
+                  </div>
+                );
+              });
+            })()
           ) : (
             <div className="glass-panel opp-card" style={{ gridColumn: 'span 3', padding: '2rem' }}>
               <p className="empty-state" style={{ padding: 0 }}>No active listings.</p>
