@@ -216,7 +216,47 @@ function App() {
                   </div>
 
                   <div className="profile-section">
-                    <h3>Benefits</h3>
+                    <h3>Compensation & Benefits</h3>
+                    
+                    {(() => {
+                      // Prioritize the new unified Opp_Salary column
+                      const unifiedSalary = selectedCompany.Opp_Salary || selectedCompany["Opp Salary"] || selectedCompany.opp_salary || selectedCompany.oppSalary || selectedCompany.Salary;
+                      
+                      const salaries = [];
+                      if (unifiedSalary && String(unifiedSalary).trim() !== "") {
+                        salaries.push(unifiedSalary);
+                      } else {
+                        // Fallback for mock data or older rows
+                        let maxOpp = 3;
+                        Object.keys(selectedCompany).forEach(key => {
+                          const match = key.match(/opp\s*_?(\d+)/i);
+                          if (match) {
+                            const num = parseInt(match[1], 10);
+                            if (num > maxOpp) maxOpp = num;
+                          }
+                        });
+                        for (let num = 1; num <= maxOpp; num++) {
+                          const oppSalary = selectedCompany[`Opp ${num} Salary`] || selectedCompany[`opp${num}Salary`] || selectedCompany[`Opp_${num}_Salary`];
+                          if (oppSalary && String(oppSalary).trim() !== "" && !salaries.includes(oppSalary)) {
+                            salaries.push(oppSalary);
+                          }
+                        }
+                      }
+                      
+                      if (salaries.length > 0) {
+                        return (
+                          <div className="salary-highlights">
+                            {salaries.map((sal, idx) => (
+                              <div key={idx} className="benefit-salary-tag">
+                                <FaRupeeSign className="salary-icon" />
+                                {sal}
+                              </div>
+                            ))}
+                          </div>
+                        );
+                      }
+                    })()}
+
                     <div className="benefits-list">
                       {(() => {
                         const b = selectedCompany.Benefits || selectedCompany.benefits;
@@ -258,7 +298,6 @@ function App() {
                 const title = selectedCompany[`Opp ${num} Title`] || selectedCompany[`opp${num}Title`] || selectedCompany[`Opp_${num}_Name`];
                 const desc = selectedCompany[`Opp ${num} Desc`] || selectedCompany[`opp${num}Desc`] || selectedCompany[`Opp_${num}_About`];
                 const link = selectedCompany[`Opp_${num}_Link`] || selectedCompany[`Opp ${num} Link`] || selectedCompany[`opp${num}Link`];
-                const salary = selectedCompany[`Opp ${num} Salary`] || selectedCompany[`opp${num}Salary`] || selectedCompany[`Opp_${num}_Salary`];
 
                 // If title doesn't exist or is empty string, don't render this Opportunity card
                 if (!title || String(title).trim() === "") return null;
@@ -266,12 +305,6 @@ function App() {
                 return (
                   <div key={num} className="glass-panel opp-card">
                     <h3 className="opp-title">{title}</h3>
-                    {salary && String(salary).trim() !== "" && (
-                      <div className="opp-salary">
-                        <FaRupeeSign className="salary-icon" />
-                        {salary}
-                      </div>
-                    )}
                     <p className="opp-desc">{desc || "Details available upon application."}</p>
                     {link && String(link).trim() !== "" ? (
                       <a href={link} target="_blank" rel="noreferrer" className="btn-details">See details</a>

@@ -318,30 +318,75 @@ body {
 
 .benefits-list {
   display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  margin-top: 0.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .benefit-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.8rem;
-  color: var(--text-secondary);
-  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.benefit-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
 .benefit-item span {
-  flex: 1;
   word-break: break-word;
 }
 
 .benefit-icon {
-  width: 20px;
-  text-align: center;
-  color: var(--text-primary);
+  width: auto;
+  font-size: 1.1rem;
+  color: #a3cfff;
   flex-shrink: 0;
-  margin-top: 0.2rem;
+}
+
+.salary-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.benefit-salary-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, rgba(3, 126, 243, 0.2) 0%, rgba(3, 126, 243, 0.05) 100%);
+  border: 1px solid rgba(3, 126, 243, 0.4);
+  color: #cce4ff;
+  padding: 0.8rem 1.2rem;
+  border-radius: var(--radius-pill);
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(3, 126, 243, 0.2);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+}
+
+.benefit-salary-tag:hover {
+  background: linear-gradient(135deg, rgba(3, 126, 243, 0.3) 0%, rgba(3, 126, 243, 0.1) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(3, 126, 243, 0.4);
+}
+
+.benefit-salary-tag .salary-icon {
+  color: #fff;
+  font-size: 1rem;
 }
 
 .visit-btn-container {
